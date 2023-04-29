@@ -6,6 +6,7 @@ import org.example.queryresults.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,10 +23,8 @@ public class DatabaseQueryService {
     public List<MaxProjectCountClient> findMaxProjectsClient(String sqlFileName) throws SQLException {
         List<MaxProjectCountClient> result = new ArrayList<>();
 
-        try (Statement st = Database.getInstance().getConnection().createStatement()) {
-            String sql = getSql(sqlFileName);
-
-            try (ResultSet rs = st.executeQuery(sql)) {
+        try (PreparedStatement stmt = Database.getInstance().getConnection().prepareStatement(getSql(sqlFileName))) {
+            try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     MaxProjectCountClient maxProjectCountClient = new MaxProjectCountClient();
                     maxProjectCountClient.setName(rs.getString("name"));
@@ -44,10 +43,8 @@ public class DatabaseQueryService {
     public List<LongestProject> findLongestProjects(String sqlFileName) throws SQLException {
         List<LongestProject> result = new ArrayList<>();
 
-        try (Statement st = Database.getInstance().getConnection().createStatement()) {
-            String sql = getSql(sqlFileName);
-
-            try (ResultSet rs = st.executeQuery(sql)) {
+        try (PreparedStatement stmt = Database.getInstance().getConnection().prepareStatement(getSql(sqlFileName))) {
+            try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     LongestProject longestProject = new LongestProject();
                     longestProject.setId(rs.getLong("id"));
@@ -67,10 +64,8 @@ public class DatabaseQueryService {
     public List<MaxSalaryWorker> findMaxSalaryWorkers(String sqlFileName) throws SQLException {
         List<MaxSalaryWorker> result = new ArrayList<>();
 
-        try (Statement st = Database.getInstance().getConnection().createStatement()) {
-            String sql = getSql(sqlFileName);
-
-            try (ResultSet rs = st.executeQuery(sql)) {
+        try (PreparedStatement stmt = Database.getInstance().getConnection().prepareStatement(getSql(sqlFileName))) {
+            try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     MaxSalaryWorker maxSalaryWorker = new MaxSalaryWorker();
                     maxSalaryWorker.setName(rs.getString("name"));
@@ -89,10 +84,8 @@ public class DatabaseQueryService {
     public List<YoungestEldestWorker> findYoungestEldestWorkers(String sqlFileName) throws SQLException {
         List<YoungestEldestWorker> result = new ArrayList<>();
 
-        try (Statement st = Database.getInstance().getConnection().createStatement()) {
-            String sql = getSql(sqlFileName);
-
-            try (ResultSet rs = st.executeQuery(sql)) {
+        try (PreparedStatement stmt = Database.getInstance().getConnection().prepareStatement(getSql(sqlFileName))) {
+            try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     YoungestEldestWorker youngestEldestWorker = new YoungestEldestWorker();
                     youngestEldestWorker.setName(rs.getString("name"));
@@ -112,10 +105,8 @@ public class DatabaseQueryService {
     public List<ProjectPrice> findProjectPrices(String sqlFileName) throws SQLException {
         List<ProjectPrice> result = new ArrayList<>();
 
-        try (Statement st = Database.getInstance().getConnection().createStatement()) {
-            String sql = getSql(sqlFileName);
-
-            try (ResultSet rs = st.executeQuery(sql)) {
+        try (PreparedStatement stmt = Database.getInstance().getConnection().prepareStatement(getSql(sqlFileName))) {
+            try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     ProjectPrice projectPrice = new ProjectPrice();
                     projectPrice.setProjectName(rs.getLong("project_name"));

@@ -2,10 +2,7 @@ package org.example.storage;
 
 import org.example.prefs.Prefs;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Database implements AutoCloseable{
     private static final Database INSTANCE = new Database();
@@ -26,8 +23,8 @@ public class Database implements AutoCloseable{
     }
 
     public int executeUpdate(String sql) {
-        try(Statement st = connection.createStatement()) {
-            return st.executeUpdate(sql);
+        try(PreparedStatement st = connection.prepareStatement(sql)) {
+            return st.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
 
