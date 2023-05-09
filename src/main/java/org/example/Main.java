@@ -1,9 +1,7 @@
 package org.example;
 
-
 import org.example.queryresults.*;
 import org.example.storage.DatabaseQueryService;
-
 import java.sql.SQLException;
 import java.util.List;
 
